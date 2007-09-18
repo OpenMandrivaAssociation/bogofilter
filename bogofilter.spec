@@ -1,15 +1,16 @@
-Summary:    Fast anti-spam filtering by Bayesian statistical analysis
-Name:       bogofilter
-Version:    1.1.5
-Release:    %mkrel 1
-License:    GPL
-Group:      Networking/Mail
-URL:        http://bogofilter.sourceforge.net
-Source0:    http://prdownloads.sourceforge.net/bogofilter/%{name}-%{version}.tar.bz2 
-Patch0:     bogofilter-0.95.2-novalgrindtest.patch 
-BuildRequires:  db4.2-devel
-BuildRequires:  gsl-devel
-BuildRoot:  %{_tmppath}/%{name}-buildroot
+Summary:	Fast anti-spam filtering by Bayesian statistical analysis
+Name:		bogofilter
+Version:	1.1.5
+Release:	%mkrel 2
+License:	GPL
+Group:		Networking/Mail
+URL:		http://bogofilter.sourceforge.net
+Source0:	http://prdownloads.sourceforge.net/bogofilter/%{name}-%{version}.tar.bz2 
+Patch0:		%{name}-0.95.2-novalgrindtest.patch
+Patch1:		%{name}-1.1.5-glibc.patch
+BuildRequires:	db4.2-devel
+BuildRequires:	gsl-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Bogofilter is a Bayesian spam filter. In its normal mode of
@@ -23,13 +24,17 @@ lot of mail.
 
 %prep
 
-%setup -q -n %{name}-%{version}
-%patch -p1 -b .novalgrindtest 
- 
+%setup -q
+%patch0 -p1 -b .novalgrindtest 
+%patch1 -p1 -b .glibc
+
 %build
 
 %configure2_5x \
-    --with-db_Transaction=yes
+    --disable-rpath \
+    --enable-transactions \
+    --with-database=db \
+    --without-included-gsl
 
 %make
  
@@ -77,15 +82,13 @@ done
 %doc AUTHORS COPYING GETTING.STARTED Doxyfile INSTALL NEWS
 %doc README* RELEASE.NOTES
 %doc RELEASE.NOTES* TODO bogofilter.cf.example
-%doc doc/README* doc/bogofilter-SA* %doc doc/integrating-* 
+%doc doc/README* doc/bogofilter-SA*
+%doc doc/integrating-* 
 %doc doc/rpm.notes.BerkeleyDB 
 %doc .inst/html .inst/xml
 %doc trio/AUTHORS trio/CHANGES trio/README 
-%doc gsl/AUTHORS gsl/README*
 %doc contrib/README*
 %config(noreplace) %{_sysconfdir}/bogofilter.cf
 %{_bindir}/*
 %{_datadir}/bogofilter
-%{_mandir}/man1/*.1*
-
-
+%{_mandir}/man1/*
