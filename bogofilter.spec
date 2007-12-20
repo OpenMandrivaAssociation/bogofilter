@@ -10,6 +10,7 @@ Patch0:		%{name}-0.95.2-novalgrindtest.patch
 Patch1:		%{name}-1.1.5-glibc.patch
 BuildRequires:	db4.2-devel
 BuildRequires:	gsl-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Bogofilter is a Bayesian spam filter. In its normal mode of
