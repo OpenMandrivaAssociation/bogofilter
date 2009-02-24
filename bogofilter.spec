@@ -6,7 +6,7 @@ License:	GPLv2+
 Group:		Networking/Mail
 URL:		http://bogofilter.sourceforge.net
 Source0:	http://prdownloads.sourceforge.net/bogofilter/%{name}-%{version}.tar.bz2 
-BuildRequires:	db4.6-devel
+BuildRequires:	db4.7-devel
 BuildRequires:	gsl-devel
 BuildRequires:	valgrind
 BuildRequires:	flex
