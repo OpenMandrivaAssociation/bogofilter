@@ -1,12 +1,12 @@
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
 Version:	1.2.1
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Networking/Mail
 URL:		http://bogofilter.sourceforge.net
 Source0:	http://prdownloads.sourceforge.net/bogofilter/%{name}-%{version}.tar.bz2 
-BuildRequires:	db4.7-devel
+BuildRequires:	db4-devel
 BuildRequires:	gsl-devel
 BuildRequires:	valgrind
 BuildRequires:	flex
@@ -39,7 +39,7 @@ lot of mail.
 %make
 
 %check
-make DESTDIR="%{buildroot}" check BF_RUN_VALGRIND=1
+make DESTDIR="%{buildroot}" check
 
 %install
 [ -n "%{buildroot}" -a "%{buildroot}" != / ] && rm -rf %{buildroot}
