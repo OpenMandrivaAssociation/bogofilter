@@ -3,7 +3,7 @@
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
 Version:	1.2.2
-Release:	%mkrel 3
+Release:	4
 License:	GPLv2+
 Group:		Networking/Mail
 URL:		http://bogofilter.sourceforge.net
