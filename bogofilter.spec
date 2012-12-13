@@ -1,4 +1,4 @@
-%define _requires_exceptions perl
+#define _requires_exceptions perl
 
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
@@ -40,7 +40,7 @@ lot of mail.
 %make
 
 %check
-#make DESTDIR="%{buildroot}" check
+make DESTDIR="%{buildroot}" check
 
 %install
 %makeinstall_std
