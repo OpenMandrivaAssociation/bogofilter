@@ -1,4 +1,6 @@
 #define _requires_exceptions perl
+%define _disable_lto 1
+%define _disable_rebuild_configure 1
 
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
