@@ -1,11 +1,12 @@
 #define _requires_exceptions perl
 %define _disable_lto 1
 %define _disable_rebuild_configure 1
+%global __requires_exclude perl
 
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
 Version:	1.2.4
-Release:	12
+Release:	13
 License:	GPLv2+
 Group:		Networking/Mail
 URL:		http://bogofilter.sourceforge.net
@@ -28,17 +29,16 @@ speed, so it can be used for production by sites that process a
 lot of mail.
 
 %prep
-
-%setup -q
+%autosetup -p1
 
 %build
-%configure2_5x \
+%configure \
     --disable-rpath \
     --disable-transactions \
     --with-database=db \
     --without-included-gsl
 
-%make
+%make_build
 
 %check
 # Some strange test failures that would need to be investigated but don't seem fatal
@@ -53,7 +53,7 @@ lot of mail.
 make DESTDIR="%{buildroot}" check ||
 
 %install
-%makeinstall_std
+%make_install
 
 mv %{buildroot}%{_sysconfdir}/bogofilter.cf.example %{buildroot}%{_sysconfdir}/bogofilter.cf
 
@@ -96,75 +96,3 @@ done
 %{_bindir}/*
 %{_datadir}/bogofilter
 %{_mandir}/man1/*
-
-
-%changelog
-* Mon May 07 2012 Crispin Boylan <crisb@mandriva.org> 1.2.2-4
-+ Revision: 797318
-- Rebuild
-
-  + Bogdano Arendartchuk <bogdano@mandriva.com>
-    - build with db 5.1 (fwang | 2011-04-12 10:39:11 +0200)
-
-* Sun Jul 11 2010 Ahmad Samir <ahmadsamir@mandriva.org> 1.2.2-2mdv2011.0
-+ Revision: 551171
-- add a _requires_exceptions for perl, not needed (from Charles A Edwards)
-
-* Sat Jul 10 2010 Tomasz Pawel Gajc <tpg@mandriva.org> 1.2.2-1mdv2011.0
-+ Revision: 550109
-- update to new version 1.2.2
-
-* Sat Jan 02 2010 Funda Wang <fwang@mandriva.org> 1.2.1-2mdv2010.1
-+ Revision: 484939
-- build for db4.8
-
-* Fri Aug 14 2009 Frederik Himpe <fhimpe@mandriva.org> 1.2.1-1mdv2010.0
-+ Revision: 416385
-- update to new version 1.2.1
-
-* Tue Feb 24 2009 Tomasz Pawel Gajc <tpg@mandriva.org> 1.2.0-1mdv2009.1
-+ Revision: 344436
-- build against db4.7
-- update to new version 1.2.0
-
-* Thu Aug 07 2008 Thierry Vignaud <tv@mandriva.org> 1.1.7-2mdv2009.0
-+ Revision: 266301
-- rebuild early 2009.0 package (before pixel changes)
-
-* Wed May 07 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.7-1mdv2009.0
-+ Revision: 202667
-- new version
-- drop patch 0 and 1, not usefull imho
-- enable valgrind test
-- add missing buildrequires
-
-* Fri Jan 11 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.6-3mdv2008.1
-+ Revision: 147813
-- disable transactional mode in Berkeley DB, probably this causes bug #36504
-- do not package INSTALL file
-
-* Sun Dec 30 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.6-2mdv2008.1
-+ Revision: 139395
-- rebuild against db4.6
-- new license policy
-- do not package COPYING file
-
-  + Olivier Blin <blino@mandriva.org>
-    - restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-
-* Thu Dec 06 2007 Andreas Hasenack <andreas@mandriva.com> 1.1.6-1mdv2008.1
-+ Revision: 116019
-- updated to version 1.1.6
-
-* Tue Sep 18 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.5-2mdv2008.0
-+ Revision: 89868
-- remove dead configure option
-- disable rpath
-- enable transactions
-- use system gsl library
-- compile with support with Berkeley's database
-- spec file clean
-
