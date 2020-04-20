@@ -88,7 +88,6 @@ done
 %doc RELEASE.NOTES* TODO bogofilter.cf.example
 %doc doc/README* doc/bogofilter-SA*
 %doc doc/integrating-* 
-%doc doc/rpm.notes.BerkeleyDB 
 %doc .inst/html .inst/xml
 %doc trio/AUTHORS trio/CHANGES trio/README 
 %doc contrib/README*
