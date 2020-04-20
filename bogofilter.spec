@@ -5,12 +5,12 @@
 
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
-Version:	1.2.4
-Release:	16
+Version:	1.2.5
+Release:	1
 License:	GPLv2+
 Group:		Networking/Mail
 URL:		http://bogofilter.sourceforge.net
-Source0:	http://freefr.dl.sourceforge.net/project/bogofilter/bogofilter-%{version}/%{name}-%{version}.tar.bz2
+Source0:	http://freefr.dl.sourceforge.net/project/bogofilter/bogofilter-%{version}/%{name}-%{version}.tar.xz
 BuildRequires:	db-devel
 BuildRequires:	gsl-devel
 BuildRequires:	valgrind
@@ -88,7 +88,6 @@ done
 %doc RELEASE.NOTES* TODO bogofilter.cf.example
 %doc doc/README* doc/bogofilter-SA*
 %doc doc/integrating-* 
-%doc doc/rpm.notes.BerkeleyDB 
 %doc .inst/html .inst/xml
 %doc trio/AUTHORS trio/CHANGES trio/README 
 %doc contrib/README*
