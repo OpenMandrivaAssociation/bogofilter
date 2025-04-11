@@ -1,0 +1,15 @@
+--- a/configure.ac
++++ b/configure.ac
+@@ -189,10 +189,10 @@ AC_SUBST(CFLAGS)
+ 
+ dnl Check if we're running GCC 4.0.0 or higher, if so, switch
+ dnl to the new -iquote scheme rather than using -I- -I.
+-gcc4=no
++gcc4=yes
+ if test "$GCC" = yes && test "$ICC" = no ; then
+     case `$CC -dumpversion 2>/dev/null` in
+-	""|2.*|3.*) ;;
++	""|2.*|3.*) gcc4=no ;;
+ 	4.*) gcc4=yes ;;
+     esac
+     case "$CC" in

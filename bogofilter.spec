@@ -6,7 +6,7 @@
 Summary:	Fast anti-spam filtering by Bayesian statistical analysis
 Name:		bogofilter
 Version:	1.2.5
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Networking/Mail
 URL:		https://bogofilter.sourceforge.net
@@ -17,6 +17,9 @@ BuildRequires:	valgrind
 BuildRequires:	flex
 BuildRequires:	xmlto
 BuildRequires:	openjade
+
+%patchlist
+bogofilter-1.2.5-clang.patch
 
 %description
 Bogofilter is a Bayesian spam filter. In its normal mode of
@@ -32,6 +35,8 @@ lot of mail.
 %autosetup -p1
 
 %build
+autoreconf -fiv
+automake
 %configure \
     --disable-rpath \
     --disable-transactions \
@@ -82,14 +87,20 @@ for n in xml html ; do
   install -m644 doc/*.$n .inst/$n
 done
 
+for f in AUTHORS CHANGES README
+do
+	cp -a trio/${f} trio/${f}.trio
+done
+
+
 %files
 %doc AUTHORS GETTING.STARTED Doxyfile NEWS
-%doc README* RELEASE.NOTES
+%doc README*
 %doc RELEASE.NOTES* TODO bogofilter.cf.example
 %doc doc/README* doc/bogofilter-SA*
 %doc doc/integrating-* 
 %doc .inst/html .inst/xml
-%doc trio/AUTHORS trio/CHANGES trio/README 
+%doc trio/AUTHORS.trio trio/CHANGES.trio trio/README.trio
 %doc contrib/README*
 %config(noreplace) %{_sysconfdir}/bogofilter.cf
 %{_bindir}/*
