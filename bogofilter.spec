@@ -11,6 +11,11 @@ License:	GPLv2+
 Group:		Networking/Mail
 URL:		https://bogofilter.sourceforge.net
 Source0:	http://freefr.dl.sourceforge.net/project/bogofilter/bogofilter-%{version}/%{name}-%{version}.tar.xz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	db-devel
 BuildRequires:	gsl-devel
 BuildRequires:	valgrind
